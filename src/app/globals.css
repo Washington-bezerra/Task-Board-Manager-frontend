@@ -20,7 +20,34 @@
 }
 
 body {
-  background: var(--background);
+  background: var(--mui-palette-background-default, #f6f7fb);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Scrollbar para Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background: transparent;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(124, 58, 237, 0.25); /* roxo opaco */
+  border-radius: 8px;
+  border: 2px solid transparent;
+  min-height: 40px;
+  min-width: 40px;
+  transition: background 0.2s;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(124, 58, 237, 0.45); /* um pouco mais visível no hover */
+}
+
+/* Scrollbar para Firefox */
+html, body {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(124, 58, 237, 0.25) transparent;
 }
