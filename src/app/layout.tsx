@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import ThemeRegistry from "@/components/ThemeRegistry";
 import "./globals.css";
 import { Inter } from 'next/font/google';
+import ClientProviders from '@/components/ClientProviders';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -20,9 +21,11 @@ export default function RootLayout({
         <header>
           {/* ...header global, se quiser... */}
         </header>
-        <ThemeRegistry>
-          {children}
-        </ThemeRegistry>
+        <ClientProviders>
+          <ThemeRegistry>
+            {children}
+          </ThemeRegistry>
+        </ClientProviders>
       </body>
     </html>
   );

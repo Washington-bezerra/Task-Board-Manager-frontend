@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Button, Container, Typography, IconButton, AppBar, Toolbar, Stack } from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
@@ -8,12 +8,27 @@ import CreateListModal from '@/components/CreateListModal';
 import ListDisplay from '@/components/ListDisplay';
 import { useThemeStore } from '@/stores/themeStore';
 import Sidebar from '@/components/Sidebar';
+import { useSession, signIn } from "next-auth/react";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
   const mode = useThemeStore((state) => state.mode);
   const toggleMode = useThemeStore((state) => state.toggleMode);
   const [selectedListId, setSelectedListId] = useState<string | null>(null);
+  const { status } = useSession();
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      signIn(); // redireciona imediatamente para o login
+    }
+  }, [status]);
+
+  if (status === "loading" || status === "unauthenticated") {
+    // Não renderiza nada enquanto não sabe o status, ou enquanto não autenticado
+    return null;
+    // Ou, se quiser, pode mostrar um spinner:
+    // return <div>Carregando...</div>;
+  }
 
   return (
     <>
